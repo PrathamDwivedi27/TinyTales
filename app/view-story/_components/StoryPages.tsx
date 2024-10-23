@@ -25,7 +25,7 @@ const StoryPages = ({ storyChapter, onSpeechEnd }: any) => {
     loadVoices();
   }, []);
 
-  const playSpeech = (text: string) => {
+  const playSpeech = (title: string, text: string) => {
     const synth = window.speechSynthesis;
 
     if (isSpeaking) {
@@ -34,13 +34,12 @@ const StoryPages = ({ storyChapter, onSpeechEnd }: any) => {
       setIsSpeaking(false);
     } else {
       // Start speaking
-      const textToSpeech = new SpeechSynthesisUtterance(text);
+      const textToSpeech = new SpeechSynthesisUtterance(`${title}. ${text}`);
       if (selectedVoice) {
         textToSpeech.voice = selectedVoice;
       }
       textToSpeech.onend = () => {
         setIsSpeaking(false);
-        onSpeechEnd(); // Trigger callback to flip the page
       };
       synth.speak(textToSpeech);
       setIsSpeaking(true);
@@ -53,7 +52,7 @@ const StoryPages = ({ storyChapter, onSpeechEnd }: any) => {
         {storyChapter?.chapter_title}
         <span
           className="text-3xl cursor-pointer"
-          onClick={() => playSpeech(storyChapter?.description)}
+          onClick={() => playSpeech(storyChapter?.chapter_title, storyChapter?.description)}
         >
           {isSpeaking ? <FaPauseCircle /> : <FaPlayCircle />}
         </span>
