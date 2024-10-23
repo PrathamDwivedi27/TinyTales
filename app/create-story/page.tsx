@@ -13,6 +13,8 @@ import CustomLoader from './_components/CustomLoader';
 import axios from 'axios';
 import { url } from 'inspector';
 import { useUser } from '@clerk/nextjs';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 const CREATE_STORY_PROMPT=process.env.NEXT_PUBLIC_CREATE_STORY_PROMPT;
 
@@ -32,7 +34,9 @@ const CreateStory = () => {
 
   const [formData,setFormData]=useState<formDataType>();
   const [loading,setLoading]=useState(false);
-  // const router=useRouter();
+  const router=useRouter();
+  const notify=(msg:string)=> toast(msg);
+  const notifyError=(msg:string)=> toast.error(msg);
   
 
   const {user}=useUser();
@@ -40,6 +44,7 @@ const CreateStory = () => {
 
   const onHandleUserSelection=(data:fieldData)=>{
     // console.log(data);
+    // notify()
     setFormData((prev:any)=>({
       ...prev,
       [data.fieldName]:data.fieldValue
@@ -74,9 +79,12 @@ const CreateStory = () => {
 
       const FirebaseStorageImageUrl=imageResult.data.imageUrl
       
-      const resp = await SaveInDB(result?.response.text(),FirebaseStorageImageUrl);
+      const resp:any = await SaveInDB(result?.response.text(),FirebaseStorageImageUrl);
+      notify('Story Generated Successfully');
       console.log(resp);
+      router?.replace('/view-story/'+resp[0].storyId)
     } catch (error) {
+      notifyError('Server Error, Try Again Later');
       console.error('Error generating image:', error);
       if ((error as any).response) {
         console.error('Server responded with status:', (error as any).response.status);
