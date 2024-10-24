@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import StorySubjectInput from './_components/StorySubjectInput';
 import StoryType from './_components/StoryType';
 import AgeGroup from './_components/AgeGroup';
@@ -15,6 +15,7 @@ import { url } from 'inspector';
 import { useUser } from '@clerk/nextjs';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import { UserDetailContext } from '../_context/UserDetailContext';
 
 const CREATE_STORY_PROMPT=process.env.NEXT_PUBLIC_CREATE_STORY_PROMPT;
 
@@ -40,6 +41,7 @@ const CreateStory = () => {
   
 
   const {user}=useUser();
+  const [userDetail,setUserDetail]=useContext(UserDetailContext);
 
 
   const onHandleUserSelection=(data:fieldData)=>{
@@ -148,12 +150,13 @@ const CreateStory = () => {
         <ImageStyle userSelection={onHandleUserSelection}/>
       </div>
 
-      <div className='flex justify-end my-10'>
+      <div className='flex justify-end my-10 flex-col items-end'>
         <Button color='primary' 
         disabled={loading}
         className='p-10 text-2xl'
         onClick={GenerateStory}
         >Generate Story</Button>
+        <span>1 Credit will be used</span>
       </div>
       <CustomLoader isLoading={loading}/>
     </div>

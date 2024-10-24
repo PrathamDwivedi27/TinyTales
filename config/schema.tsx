@@ -1,4 +1,5 @@
-import { json,pgTable, serial,text,varchar } from "drizzle-orm/pg-core";
+import { user } from "@nextui-org/theme";
+import { integer, json,pgTable, serial,text,varchar } from "drizzle-orm/pg-core";
 
 export const StoryData=pgTable('storyData',{
     id:serial('id').primaryKey(),
@@ -13,4 +14,12 @@ export const StoryData=pgTable('storyData',{
     userName:varchar('userName'),
     userImage:varchar('userImage'),
 
+})
+
+export const Users=pgTable('users',{
+    id:serial('id').primaryKey(),
+    userEmail:varchar('userEmail'),
+    userName:varchar('userName'),
+    userImage:varchar('userImage'),
+    credit:integer('credit').default(3)
 })
