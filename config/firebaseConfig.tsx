@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAetWx353NkEiE7bVDsqKjzua63HL7ePRI",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "tinytales-6882e.firebaseapp.com",
   projectId: "tinytales-6882e",
   storageBucket: "tinytales-6882e.appspot.com",
