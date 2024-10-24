@@ -5,7 +5,7 @@ import Hero from './_components/Hero'
 
 function page() {
   return (
-    <div className='bg-[#cad3ff] h-full'>
+    <div className='bg-[#cad3ff] min-h-screen'>
      {/* Header
       <Header/> */}
 
