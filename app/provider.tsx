@@ -10,6 +10,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/config/db";
 import { useUser } from '@clerk/nextjs'
 import { UserDetailContext } from './_context/UserDetailContext'
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 
 
@@ -47,15 +48,18 @@ const saveNewUserIfNotExist=async()=>{
     setUserDetail(userResp[0]);
   }
 }
+// client id we get from developer.paypal.com
   return (
-    <div className='bg-[#cad3ff]'>
+    <div className='bg-[#cad3ff]'>   
        <UserDetailContext.Provider value={{userDetail,setUserDetail}}>
+       <PayPalScriptProvider options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID??"" }}>        
        <NextUIProvider>
         {/* Header */}
         <Header/>
         {children}
         <ToastContainer />
        </NextUIProvider>
+       </PayPalScriptProvider>
        </UserDetailContext.Provider>
      </div> 
   )
