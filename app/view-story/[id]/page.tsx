@@ -66,7 +66,7 @@ const ViewStory = ({ params }: any) => {
             className="absolute -left-5 top-[250px]"
             onClick={() => {
               if (bookRef.current) {
-                bookRef.current?.pageFlip().flipPrev();
+                (bookRef.current as any)?.pageFlip().flipPrev();
                 setCount(count - 1);
               }
             }}
@@ -79,7 +79,7 @@ const ViewStory = ({ params }: any) => {
             className="absolute -right-5 top-[250px]"
             onClick={() => {
               if (bookRef.current) {
-                bookRef.current?.pageFlip().flipNext();
+                (bookRef.current as any)?.pageFlip().flipNext();
               }
               setCount(count + 1);
             }}
