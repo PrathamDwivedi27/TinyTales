@@ -8,7 +8,7 @@ import { Button } from '@nextui-org/button';
 import { chatSession } from '@/config/GeminiAi';
 import uuid4  from "uuid4"
 import { db } from '@/config/db';
-import { StoryData } from '@/config/schema';
+import { StoryData, Users } from '@/config/schema';
 import CustomLoader from './_components/CustomLoader';
 import axios from 'axios';
 import { url } from 'inspector';
@@ -16,6 +16,7 @@ import { useUser } from '@clerk/nextjs';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { UserDetailContext } from '../_context/UserDetailContext';
+import { eq } from 'drizzle-orm';
 
 const CREATE_STORY_PROMPT=process.env.NEXT_PUBLIC_CREATE_STORY_PROMPT;
 
@@ -41,7 +42,7 @@ const CreateStory = () => {
   
 
   const {user}=useUser();
-  const [userDetail,setUserDetail]=useContext(UserDetailContext);
+  const {userDetail,setUserDetail}=useContext(UserDetailContext);
 
 
   const onHandleUserSelection=(data:fieldData)=>{
@@ -56,6 +57,10 @@ const CreateStory = () => {
 
   const GenerateStory=async()=>{
 
+    if(userDetail?.credit<1){
+      notifyError('Not Enough Credits');
+      return;
+    }
     setLoading(true);
     //Generate AI Story
     const FINAL_PROMPT=CREATE_STORY_PROMPT
@@ -83,6 +88,7 @@ const CreateStory = () => {
       
       const resp:any = await SaveInDB(result?.response.text(),FirebaseStorageImageUrl);
       notify('Story Generated Successfully');
+      await UpdateUserCredits();
       console.log(resp);
       router?.replace('/view-story/'+resp[0].storyId)
     } catch (error) {
@@ -129,6 +135,13 @@ const CreateStory = () => {
 
     }
     
+  }
+
+  const UpdateUserCredits=async()=>{
+    const result=await db.update(Users).set({
+      credit:Number(userDetail?.credit-1)
+    }).where(eq(Users.userEmail,user?.primaryEmailAddress?.emailAddress??""))
+    .returning({id:Users.id})
   }
 
   return (

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import { useContext } from 'react'
 import { UserDetailContext } from '@/app/_context/UserDetailContext'
+import { Button } from '@nextui-org/button'
 
 const DashboardHeader = () => {
 
@@ -13,6 +14,7 @@ const DashboardHeader = () => {
       <div className='flex gap-3 items-center'>
         <Image src={'/coin.png'} width={50} height={50} alt='coin' />
         <span className='text-2xl'>{userDetail?.credit} Credits Left</span>
+        <Button className='bg-blue-400' >Buy More Credits</Button>
       </div>
     </div>
   )
