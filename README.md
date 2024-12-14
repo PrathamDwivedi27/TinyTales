@@ -97,6 +97,3 @@ Kiddie Tales is designed to provide an entertaining, interactive, and educationa
 ---
 
 
-
----
-
