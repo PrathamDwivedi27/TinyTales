@@ -2,6 +2,9 @@
 
 Kiddie Tales is an innovative platform for generating personalized, engaging, and educational stories for children. Powered by AI and advanced recommendations, Kiddie Tales tailors each story based on the child's preferred subject, story type, age group, and image style. The platform offers a seamless experience with a realistic paper-flipping UI, beautiful book cover images, voice assistant integration for reading stories aloud, and an interactive contact page.
 
+## Demo Video  
+[![Watch the Demo](https://img.youtube.com/vi/2kQdNODxtAo/0.jpg)](https://www.youtube.com/watch?v=fACrZ0zM6Zo&ab_channel=PrathamDwivedi)
+
 ## Features
 
 - **AI-Generated Stories**: Generate personalized stories based on the subject, story type, age group, and image style.
