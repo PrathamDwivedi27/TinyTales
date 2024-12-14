@@ -5,6 +5,9 @@ Kiddie Tales is an innovative platform for generating personalized, engaging, an
 ## Demo Video  
 [![Watch the Demo](https://img.youtube.com/vi/fACrZ0zM6Zo/0.jpg)](https://www.youtube.com/watch?v=fACrZ0zM6Zo&ab_channel=PrathamDwivedi) 
 
+**Get Started Now!**  
+Visit [Kiddie Tales](https://kiddie-tales.vercel.app/) and start creating personalized stories for kids today.
+
 ## Features
 
 - **AI-Generated Stories**: Generate personalized stories based on the subject, story type, age group, and image style.
@@ -93,8 +96,7 @@ Kiddie Tales is designed to provide an entertaining, interactive, and educationa
 
 ---
 
-**Get Started Now!**  
-Visit [Kiddie Tales](https://kiddie-tales.vercel.app/) and start creating personalized stories for kids today.
+
 
 ---
 
